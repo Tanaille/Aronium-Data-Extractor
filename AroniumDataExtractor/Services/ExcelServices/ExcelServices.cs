@@ -23,7 +23,10 @@ namespace AroniumDataExtractor.Services.ExcelServices
         public void WriteDataToWorksheet(CustomerItemQuantities customerItemQuantities, DateTime startDate, DateTime endDate)
         {
             // Create Excel worksheet
-            string excelFilePath = System.AppDomain.CurrentDomain.BaseDirectory + $"\\Account-Product Report - {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.xlsx";
+            string excelFilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) +
+                $"\\OneDrive - Ferrum High School\\Desktop" +
+                $"\\Account Product Report - {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.xlsx";
+
             ExcelPackage package = new ExcelPackage(excelFilePath);
             ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Products per Customer");
 

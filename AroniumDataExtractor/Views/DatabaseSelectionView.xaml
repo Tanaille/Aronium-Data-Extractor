@@ -10,20 +10,24 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <Label Text="Start date" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" TextColor="DarkBlue" FontSize="14"/>
-        <Label Text="End date" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" TextColor="DarkBlue" FontSize="14"/>
+        <Label Text="Start date" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" TextColor="#0d5f31" FontSize="14" />
+        <Label Text="End date" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" TextColor="#0d5f31" FontSize="14" />
 
         <DatePicker x:Name="StartDatePicker" Grid.Row="1" Grid.Column="0" />
         <DatePicker x:Name="EndDatePicker" Grid.Row="1" Grid.Column="1" />
 
         <Button x:Name="DatabaseSelectionButton" Text="Select Database" Grid.Row="2" Grid.ColumnSpan="2" />
-        <Button x:Name="GenerateReportButton" Text="Generate Report" Grid.Row="3" Grid.ColumnSpan="2" />
+        <Button x:Name="GenerateReportButton" Text="Generate Report" Grid.Row="3" Grid.ColumnSpan="2" IsEnabled="false"/>
+
+        <ActivityIndicator x:Name="ReportGenerationActivityIndicator" IsVisible="True" Grid.Row="4" Grid.ColumnSpan="2" IsRunning="False" />
+        <Image x:Name="SuccessImage" Source="success.png" WidthRequest="50" HeightRequest="50" IsVisible="False" Grid.Row="4" Grid.ColumnSpan="2" />
 
     </Grid>
  

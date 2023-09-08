@@ -41,7 +41,7 @@ public partial class DatabaseSelectionView : ContentPage
         }
     }
 
-    private void GenerateReportButton_Clicked(object sender, EventArgs e)
+    private async void GenerateReportButton_Clicked(object sender, EventArgs e)
     {
         // Get start and end date
         DateTime startDate = StartDatePicker.Date;
@@ -53,13 +53,30 @@ public partial class DatabaseSelectionView : ContentPage
 
         var queryResult = sqlCommandServices.GetCustomerItemQuantities(startDate, endDate);
 
+        ReportGenerationActivityIndicator.IsVisible = true;
+        ReportGenerationActivityIndicator.IsRunning = true;
+
         // Write results to and Excel file
         _excelServices.WriteDataToWorksheet(queryResult, startDate, endDate);
+        await Task.Delay(500);
+
+        ReportGenerationActivityIndicator.IsRunning = false;
+        ReportGenerationActivityIndicator.IsVisible = false;
+
+        SuccessImage.IsVisible = true;
+        await Task.Delay(2000);
+        SuccessImage.IsVisible = false;
     }
 
     private async void DatabaseSelectionButton_Clicked(object sender, EventArgs e)
     {
         // Get database file path
-        databaseFilePath = (await _filePickerService.PickAndShow(_filePickerFileTypes.PickOptions)).FullPath;
+        var fileResult = await _filePickerService.PickAndShow(_filePickerFileTypes.PickOptions);
+
+        if (fileResult is not null)
+        {
+            databaseFilePath = fileResult.FullPath;
+            GenerateReportButton.IsEnabled = true;
+        }
     }
 }
