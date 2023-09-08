@@ -1,56 +1,63 @@
-﻿using AroniumDataExtractor.Services.DatabaseServices;
-using System.Data.SQLite;
+﻿using AroniumDataExtractor.Models.QueryResultModels;
+using AroniumDataExtractor.Services.DatabaseServices;
 
 namespace AroniumDataExtractor.Services.SqlCommandServices
 {
-    public class SqlCommandServices
+    /// <summary>
+    /// Provides SQL query services.
+    /// </summary>
+    public class SqlCommandServices : ISqlCommandServices
     {
         private readonly IDatabaseService _databaseService;
+        public string ConnectionString { get; set; }
 
         public SqlCommandServices(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
         }
 
-        public int GetNumberOfCustomers()
+        /// <summary>
+        /// Retrieves all total number of each product purchased by a customer for a specified date range.
+        /// </summary>
+        /// <param name="startDate">Start of the date range.</param>
+        /// <param name="endDate">End of the date range.</param>
+        /// <returns></returns>
+        public CustomerItemQuantities GetCustomerItemQuantities(DateTime startDate, DateTime endDate)
         {
-            int customerCount = 0;
+            _databaseService.Connect(ConnectionString);
 
-            using (SQLiteCommand command = _databaseService.Connection.CreateCommand())
-            {
-                command.CommandText = @"SELECT COUNT(Id) AS NumberOfCustomers
-                                    FROM Customer";
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                        customerCount = reader.GetInt32(0);
-                }
-            };
-
-            return customerCount;
-        }
-
-        public string GetCustomerName(int id)
-        {
-            string customerName = string.Empty;
+            CustomerItemQuantities customerItemQuantities = new CustomerItemQuantities();
 
             using (var command = _databaseService.Connection.CreateCommand())
             {
-                command.CommandText = @"SELECT Name FROM Customer WHERE Id = $id";
+                command.CommandText = @"SELECT 
+                                            c.Name AS CustomerName,
+                                            p.Name AS ProductName,
+                                            SUM(di.Quantity) AS TotalQuantitySold
+                                        FROM Customer AS c
+                                        JOIN Document AS d ON c.Id = d.CustomerId
+                                        JOIN DocumentItem AS di ON d.Id = di.DocumentId
+                                        JOIN Product AS p ON di.ProductId = p.Id
+                                        WHERE d.Date >= date($startDate)
+                                        AND d.Date <= date($endDate)
+                                        GROUP BY c.Name, p.Id, p.Name
+                                        ORDER BY CustomerName, TotalQuantitySold DESC";
 
-                command.Parameters.AddWithValue("id", id);
+                command.Parameters.AddWithValue("startDate", startDate.Date.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("endDate", endDate.Date.ToString("yyyy-MM-dd"));
 
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        customerName = reader.GetString(0);
+                        customerItemQuantities.CustomerName.Add(reader.GetString(0));
+                        customerItemQuantities.Products.Add(reader.GetString(1));
+                        customerItemQuantities.Quantities.Add(reader.GetInt32(2));
                     }
                 }
-            };
 
-            return customerName;
+                return customerItemQuantities;
+            }
         }
     }
 }

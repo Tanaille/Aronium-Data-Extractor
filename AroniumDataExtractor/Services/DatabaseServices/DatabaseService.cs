@@ -2,25 +2,36 @@
 
 namespace AroniumDataExtractor.Services.DatabaseServices
 {
+    /// <summary>
+    /// Contains SQLite database connect / disconnect methods.
+    /// </summary>
     public class DatabaseService : IDatabaseService
     {
         public SQLiteConnection Connection { get; set; }
 
         public DatabaseService()
         {
+
         }
 
-        public async void Connect(string filePath)
+        /// <summary>
+        /// Connect to a SQLite database.
+        /// </summary>
+        /// <param name="filePath">Path to the SQLite database.</param>
+        public void Connect(string filePath)
         {
             SQLiteConnection connection = new SQLiteConnection($"DataSource={filePath}");
             Connection = connection;
 
-            await connection.OpenAsync();
+            connection.Open();
         }
 
-        public async void Disconnect()
+        /// <summary>
+        /// Disconnect from a SQLite database.
+        /// </summary>
+        public void Disconnect()
         {
-            await Connection.CloseAsync();
+            Connection.Close();
         }
     }
 }

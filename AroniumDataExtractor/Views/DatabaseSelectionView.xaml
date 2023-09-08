@@ -4,7 +4,27 @@
              x:Class="AroniumDataExtractor.Views.DatabaseSelectionView"
              Title="Aronium Data Extractor">
 
-    <VerticalStackLayout VerticalOptions="Center">
-        <Button x:Name="DatabaseSelectionButton" Text="Select Database" HorizontalOptions="Center" VerticalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" ColumnSpacing="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Start date" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" TextColor="DarkBlue" FontSize="14"/>
+        <Label Text="End date" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" TextColor="DarkBlue" FontSize="14"/>
+
+        <DatePicker x:Name="StartDatePicker" Grid.Row="1" Grid.Column="0" />
+        <DatePicker x:Name="EndDatePicker" Grid.Row="1" Grid.Column="1" />
+
+        <Button x:Name="DatabaseSelectionButton" Text="Select Database" Grid.Row="2" Grid.ColumnSpan="2" />
+        <Button x:Name="GenerateReportButton" Text="Generate Report" Grid.Row="3" Grid.ColumnSpan="2" />
+
+    </Grid>
+ 
 </ContentPage>

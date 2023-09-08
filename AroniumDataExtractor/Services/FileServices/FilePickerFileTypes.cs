@@ -1,5 +1,8 @@
 ﻿namespace AroniumDataExtractor.Services.FileServices
 {
+    /// <summary>
+    /// Defines a custom SQLite database file picker extension.
+    /// </summary>
     public class FilePickerFileTypes : IFilePickerFileTypes
     {
         public PickOptions PickOptions { get; }
