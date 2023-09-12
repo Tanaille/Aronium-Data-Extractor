@@ -7,11 +7,12 @@ namespace AroniumDataExtractor.Services.DatabaseServices
     /// </summary>
     public class DatabaseService : IDatabaseService
     {
-        public SQLiteConnection Connection { get; set; }
+        public SQLiteConnection Connection { get; private set; }
 
         public DatabaseService()
         {
-
+            SQLiteConnection connection = new SQLiteConnection();
+            Connection = connection;
         }
 
         /// <summary>
@@ -20,10 +21,10 @@ namespace AroniumDataExtractor.Services.DatabaseServices
         /// <param name="filePath">Path to the SQLite database.</param>
         public void Connect(string filePath)
         {
-            SQLiteConnection connection = new SQLiteConnection($"DataSource={filePath}");
-            Connection = connection;
+            Connection.ParseViaFramework = true;
+            Connection.ConnectionString = $"DataSource={filePath};Mode=ReadOnly";
 
-            connection.Open();
+            Connection.Open();
         }
 
         /// <summary>

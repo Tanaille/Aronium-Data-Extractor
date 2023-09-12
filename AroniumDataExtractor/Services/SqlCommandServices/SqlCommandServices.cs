@@ -9,7 +9,6 @@ namespace AroniumDataExtractor.Services.SqlCommandServices
     public class SqlCommandServices : ISqlCommandServices
     {
         private readonly IDatabaseService _databaseService;
-        public string ConnectionString { get; set; }
 
         public SqlCommandServices(IDatabaseService databaseService)
         {
@@ -24,8 +23,6 @@ namespace AroniumDataExtractor.Services.SqlCommandServices
         /// <returns></returns>
         public CustomerItemQuantities GetCustomerItemQuantities(DateTime startDate, DateTime endDate)
         {
-            _databaseService.Connect(ConnectionString);
-
             CustomerItemQuantities customerItemQuantities = new CustomerItemQuantities();
 
             using (var command = _databaseService.Connection.CreateCommand())

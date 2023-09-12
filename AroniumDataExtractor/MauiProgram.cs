@@ -21,7 +21,7 @@ namespace AroniumDataExtractor
             builder.Services.AddSingleton<DatabaseSelectionView>();
 
             // Register services
-            builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
+            builder.Services.AddTransient<IDatabaseService, DatabaseService>();
             builder.Services.AddTransient<IFilePickerService, FilePickerService>();
             builder.Services.AddSingleton<IFilePickerFileTypes, FilePickerFileTypes>();
             builder.Services.AddSingleton<IExcelServices, ExcelServices>();

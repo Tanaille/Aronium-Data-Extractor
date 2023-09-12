@@ -4,7 +4,7 @@ namespace AroniumDataExtractor.Services.DatabaseServices
 {
     public interface IDatabaseService
     {
-        SQLiteConnection Connection { get; set; }
+        SQLiteConnection Connection { get; }
 
         void Connect(string filePath);
         void Disconnect();
