@@ -16,8 +16,8 @@ Download the latest release from the [releases](https://github.com/Tanaille/Aron
 
 ## Additional Information
 
-The Aronium POS database schema can be found [HERE](https://github.com/Tanaille/Aronium-Data-Extractor/blob/master/Images/Aronium%20Database%20Schema.pdf). This schema has been generated using 
-DbVisualizer and has been provided to simply the creation of new report generation methods.
+The Aronium POS database schema can be found [here](https://github.com/Tanaille/Aronium-Data-Extractor/blob/master/Images/Aronium%20Database%20Schema.pdf). This schema has been generated using 
+DbVisualizer and has been provided to simplify the creation of new report generation methods.
 
 ## Platforms
 
