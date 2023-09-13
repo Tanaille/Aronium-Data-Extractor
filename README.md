@@ -14,6 +14,9 @@ Download the latest release from the [releases](https://github.com/Tanaille/Aron
 
 ![Application](https://github.com/Tanaille/Aronium-Data-Extractor/assets/34229043/e8cfee27-8473-4fe8-adbb-d4015178edad)
 
+![Report](https://github.com/Tanaille/Aronium-Data-Extractor/assets/34229043/9eee7c22-6747-4941-adf6-f18e8ea87a65)
+
+
 ## Additional Information
 
 The Aronium POS database schema can be found [here](https://github.com/Tanaille/Aronium-Data-Extractor/blob/master/Images/Aronium%20Database%20Schema.pdf). This schema has been generated using 
