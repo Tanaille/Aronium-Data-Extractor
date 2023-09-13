@@ -49,9 +49,11 @@ public partial class DatabaseSelectionView : ContentPage
 
         // Retrieve the data from the database
         SqlCommandServices sqlCommandServices = new SqlCommandServices(_databaseService);
-        sqlCommandServices.ConnectionString = databaseFilePath;
+        _databaseService.Connect(databaseFilePath);
 
         var queryResult = sqlCommandServices.GetCustomerItemQuantities(startDate, endDate);
+
+        _databaseService.Disconnect();
 
         ReportGenerationActivityIndicator.IsVisible = true;
         ReportGenerationActivityIndicator.IsRunning = true;
