@@ -12,6 +12,13 @@ This application simplifies the process by exporting the product sales data to a
 
 Run the application, select the start and end date, select the Aronium pos.db SQLite database file and click "Generate Report". The report is automatically saved to the user's desktop.
 
+![Application](https://github.com/Tanaille/Aronium-Data-Extractor/assets/34229043/e8cfee27-8473-4fe8-adbb-d4015178edad)
+
+## Additional Information
+
+The Aronium POS database schema can be found [HERE](https://github.com/Tanaille/Aronium-Data-Extractor/blob/master/Images/Aronium%20Database%20Schema.pdf). This schema has been generated using 
+DbVisualizer and has been provided to simply the creation of new report generation methods.
+
 ## Platforms
 
 The application is designed to run on Microsoft Windows.
